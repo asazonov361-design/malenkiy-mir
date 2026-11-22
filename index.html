@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#fff0f5">
+<title>Маленький мир для тебя ♡</title>
+<style>
+:root{--pink:#f5a9c5;--deep:#bd668c;--ink:#68485a;--cream:#fff9fb;--line:#f5dce7}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 12% 8%,#ffe3ef 0,transparent 27%),radial-gradient(circle at 90% 35%,#fce8f1 0,transparent 25%),#fff9fb;color:var(--ink);font-family:Georgia,"Times New Roman",serif;overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+.wrap{width:min(980px,92vw);margin:auto}
+nav{display:flex;justify-content:space-between;align-items:center;padding:22px 0;color:#a66b85;font-family:system-ui,sans-serif;font-size:13px}
+.logo{font-family:Georgia,serif;font-size:20px;color:#b96e91}
+.nav-pill{border:1px solid #f0cbd9;background:#fff9fc;border-radius:30px;padding:9px 14px;color:#a66b85}
+.hero{min-height:620px;display:grid;place-items:center;text-align:center;position:relative;padding:70px 10px 90px}
+.eyebrow{letter-spacing:.22em;text-transform:uppercase;font:11px system-ui;color:#c17c9b}
+h1{font-size:clamp(44px,8vw,82px);line-height:1.03;font-weight:400;margin:20px 0;color:#9e5d7c}
+h1 em{font-weight:400;color:#df91b0}
+.lead{font-size:19px;line-height:1.7;max-width:550px;margin:0 auto 28px;color:#876477}
+.btn{border:0;border-radius:999px;padding:14px 23px;background:linear-gradient(135deg,#e99cba,#d77fa3);color:white;box-shadow:0 9px 22px #d88eaa44;transition:.2s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px #d88eaa66}
+.btn.ghost{background:#fff;border:1px solid #f0cbd9;color:#b46c8c;box-shadow:none}
+.hero-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.heart-orbit{position:absolute;color:#e6a1bb;opacity:.7;animation:float 5s ease-in-out infinite;font-size:25px}
+.h1{top:17%;left:12%}.h2{top:25%;right:12%;animation-delay:1s}.h3{bottom:18%;left:18%;animation-delay:2s}.h4{bottom:21%;right:17%;animation-delay:.7s}
+@keyframes float{50%{transform:translateY(-18px) rotate(12deg)}}
+section{padding:64px 0}
+.section-title{text-align:center;font-size:clamp(30px,5vw,43px);font-weight:400;color:#a35f7f;margin:0 0 12px}
+.section-sub{text-align:center;color:#a98496;font:14px system-ui;margin:0 auto 30px;line-height:1.6}
+.paper{background:#fffdfd;border:1px solid var(--line);border-radius:24px;box-shadow:0 12px 35px #c97f9a12}
+.note{max-width:700px;margin:auto;padding:34px 38px;text-align:center;font-size:19px;line-height:1.9}
+.note .signature{color:#c67c9c;font-style:italic;margin-top:18px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.tile{padding:24px 18px;text-align:center;min-height:170px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.tile .emoji{font-size:30px}.tile h3{font-size:20px;font-weight:400;margin:0;color:#a35f7f}.tile p{font:13px/1.5 system-ui;color:#9c7d8c;margin:0}
+.reasons{max-width:720px;margin:auto;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.reason{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;color:#9a6c81;text-align:left;min-height:65px;transition:.2s}
+.reason:hover{background:#fff1f6;transform:translateY(-2px)}
+.reason span{color:#d78aa8;margin-right:8px}
+.garden{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;padding:25px}
+.flower{font-size:38px;border:1px solid #f3d5e1;background:#fff8fb;border-radius:18px;width:76px;height:76px;transition:.25s}
+.flower:hover{transform:rotate(-8deg) scale(1.08)}
+.secret-box{max-width:600px;margin:auto;padding:30px;text-align:center}
+.secret-box input{width:min(260px,100%);padding:12px 15px;border:1px solid #efcddd;border-radius:25px;outline:none;color:#865c71;background:#fffafd;text-align:center}
+footer{text-align:center;padding:50px 10px 65px;color:#b58b9e;font:13px system-ui}
+#toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:#9f617e;color:#fff;padding:12px 18px;border-radius:30px;opacity:0;pointer-events:none;transition:.3s;z-index:20;white-space:nowrap;max-width:90vw}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+.modal{position:fixed;inset:0;background:#59364966;display:none;place-items:center;padding:20px;z-index:30}
+.modal.open{display:grid}
+.modal-card{max-width:520px;width:100%;padding:36px 30px;text-align:center;position:relative;animation:pop .3s ease}
+@keyframes pop{from{transform:scale(.9);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-card h2{font-weight:400;color:#a35f7f;font-size:32px;margin:5px 0 14px}
+.modal-card p{line-height:1.8;font-size:17px}
+.close{position:absolute;right:15px;top:12px;border:0;background:none;color:#b77b95;font-size:25px}
+#confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:40}
+.particle{position:absolute;top:-30px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(600deg);opacity:.2}}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.reasons{grid-template-columns:1fr}.hero{min-height:560px}.note{padding:26px 22px}.h1{left:4%}.h2{right:4%}}
+</style>
+</head>
+<body>
+<div id="confetti"></div>
+<div class="wrap">
+<nav><div class="logo">♡ маленький мир</div><button class="nav-pill" id="musicBtn">♫ включить мелодию</button></nav>
+<main>
+<header class="hero">
+<span class="heart-orbit h1">♡</span><span class="heart-orbit h2">✿</span><span class="heart-orbit h3">♡</span><span class="heart-orbit h4">✧</span>
+<div>
+<div class="eyebrow">маленькое послание для одного особенного человека</div>
+<h1>Этот мир<br><em>для тебя</em> ♡</h1>
+<p class="lead">Здесь собраны нежность, улыбки и несколько маленьких секретов. Просто потому, что ты — чудо.</p>
+<div class="hero-actions"><button class="btn" id="openLetter">Открыть письмо 💌</button><button class="btn ghost" id="surprise">Мне нужен сюрприз ✨</button></div>
+</div>
+</header>
+
+<section id="letter">
+<h2 class="section-title">Несколько слов от сердца</h2>
+<p class="section-sub">Не торопись. Это письмо написано с теплом.</p>
+<div class="paper note">
+<div style="font-size:34px">💗</div>
+Иногда хочется остановить мгновение и просто сказать: как же здорово, что ты есть. Пусть у тебя будет побольше поводов улыбаться, тёплых объятий, спокойных дней и сбывшихся мечтаний. А если вдруг день окажется непростым — помни, что ты заслуживаешь заботы, нежности и самого доброго отношения.
+<div class="signature">С теплом, от всего сердца ♡</div>
+</div>
+</section>
+
+<section>
+<h2 class="section-title">Маленькие напоминания</h2>
+<p class="section-sub">Нажми на любую карточку — у каждой есть своё послание.</p>
+<div class="grid">
+<button class="paper tile" data-message="Твоя улыбка — маленькое солнце. Пусть сегодня оно светит особенно ярко."><div class="emoji">🌷</div><h3>Улыбнись</h3><p>У тебя прекрасно получается делать мир светлее</p></button>
+<button class="paper tile" data-message="Ты достойна самых красивых слов, искренних поступков и бережного отношения."><div class="emoji">🦢</div><h3>Ты ценна</h3><p>Не забывай, какая ты удивительная</p></button>
+<button class="paper tile" data-message="Пусть сегодня случится что-нибудь хорошее. Даже если это просто вкусный чай и любимая песня."><div class="emoji">🍓</div><h3>Береги себя</h3><p>И не забывай радовать себя мелочами</p></button>
+</div>
+</section>
+
+<section>
+<h2 class="section-title">Причины улыбнуться</h2>
+<p class="section-sub">Открывай карточки — здесь спрятаны добрые слова.</p>
+<div class="reasons" id="reasons">
+<button class="reason"><span>♡</span>Нажми, чтобы открыть причину №1</button>
+<button class="reason"><span>♡</span>Нажми, чтобы открыть причину №2</button>
+<button class="reason"><span>♡</span>Нажми, чтобы открыть причину №3</button>
+<button class="reason"><span>♡</span>Нажми, чтобы открыть причину №4</button>
+<button class="reason"><span>♡</span>Нажми, чтобы открыть причину №5</button>
+<button class="reason"><span>♡</span>Нажми, чтобы открыть причину №6</button>
+</div>
+</section>
+
+<section>
+<h2 class="section-title">Сад нежности</h2>
+<p class="section-sub">Нажимай на цветочки, чтобы они расцветали 🌸</p>
+<div class="paper garden" id="garden">
+<button class="flower">🌱</button><button class="flower">🌱</button><button class="flower">🌱</button><button class="flower">🌱</button><button class="flower">🌱</button>
+</div>
+<p class="section-sub" id="gardenHint">Каждый распустившийся цветок — ещё одно тёплое пожелание.</p>
+</section>
+
+<section>
+<h2 class="section-title">Секретный уголок 🔐</h2>
+<p class="section-sub">Тут есть маленький секрет. Попробуй угадать пароль.</p>
+<div class="paper secret-box">
+<p style="font-size:28px;margin:0 0 15px">🗝️</p>
+<input id="password" placeholder="Подсказка: ты самая прекрасная..." aria-label="Секретный пароль">
+<p><button class="btn" id="unlock">Открыть секрет</button></p>
+<p style="font:12px system-ui;color:#b28da0">Подсказка: ты самая прекрасная... 😉</p>
+</div>
+</section>
+</main>
+<footer>Сделано с нежностью и капелькой волшебства ♡<br><span id="dateLine"></span></footer>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+<div class="paper modal-card"><button class="close" id="closeModal" aria-label="Закрыть">×</button><div style="font-size:38px" id="modalEmoji">💌</div><h2 id="modalTitle">Для тебя</h2><p id="modalText"></p><button class="btn" id="modalOk">Мне нравится ♡</button></div>
+</div>
+<div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s);
+const modal=$('#modal');
+function showModal(title,text,emoji='💗'){ $('#modalTitle').textContent=title;$('#modalText').textContent=text;$('#modalEmoji').textContent=emoji;modal.classList.add('open');}
+function closeModal(){modal.classList.remove('open')}
+$('#openLetter').onclick=()=>showModal('Моё маленькое письмо','Ты — не случайная страница в чьей-то истории. Ты целый маленький мир, в котором хочется замечать детали, беречь моменты и снова находить поводы для улыбки. Пусть это письмо напомнит тебе: ты очень дорога.','💌');
+$('#surprise').onclick=()=>{burst();showModal('Сюрприз!','Если бы можно было подарить тебе одну вещь прямо сейчас, это было бы умение видеть себя такой, какой тебя видят любящие люди: прекрасной, важной и совершенно неповторимой.','🎁')};
+document.querySelectorAll('[data-message]').forEach(b=>b.onclick=()=>showModal('Тебе на заметку',b.dataset.message,'🌸'));
+$('#closeModal').onclick=closeModal;$('#modalOk').onclick=closeModal;modal.onclick=e=>{if(e.target===modal)closeModal()};
+const reasons=['Потому что твоя улыбка меняет атмосферу вокруг.','Потому что в тебе есть своя неповторимая магия.','Потому что даже обычный день может стать особенным.','Потому что ты заслуживаешь самого доброго.','Потому что мир лучше, когда ты в нём улыбаешься.','Просто потому, что ты — это ты. И этого достаточно.'];
+document.querySelectorAll('.reason').forEach((b,i)=>b.onclick=()=>{b.innerHTML='<span>♡</span>'+reasons[i];b.style.background='#fff0f6';b.disabled=true});
+const blooms=['🌷','🌸','🌼','🌺','🌻'];let bloomed=0;
+document.querySelectorAll('.flower').forEach((b,i)=>b.onclick=()=>{if(b.textContent==='🌱'){b.textContent=blooms[i];bloomed++;$('#gardenHint').textContent=bloomed===5?'Твой сад расцвёл! Пусть и каждый день будет таким же ярким. 🌷':'Расцвело '+bloomed+' из 5 цветочков. Так красиво!';if(bloomed===5)burst()}});
+$('#unlock').onclick=()=>{const val=$('#password').value.trim().toLowerCase();if(['принцесса'].includes(val)){showModal('Ты нашла секрет!','Ты — моё самое любимое чудо. Мне хочется дарить тебе улыбки, обнимать тебя крепче всего на свете и напоминать каждый день, насколько ты прекрасна. Если бы мне пришлось выбирать снова, я бы снова выбрал тебя. Ты — моя принцесса, моя нежность и моё счастье. ❤️','🔓');burst()}else{toast('Почти! Попробуй слово «любовь» 💗')}};
+$('#password').addEventListener('keydown',e=>{if(e.key==='Enter')$('#unlock').click()});
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2300)}
+function burst(){const box=$('#confetti');const chars=['♡','✿','🌸','💗','✨'];for(let i=0;i<34;i++){const p=document.createElement('span');p.className='particle';p.textContent=chars[Math.floor(Math.random()*chars.length)];p.style.left=Math.random()*100+'%';p.style.animationDuration=(2.5+Math.random()*2)+'s';p.style.fontSize=(14+Math.random()*18)+'px';box.appendChild(p);setTimeout(()=>p.remove(),5000)}}
+let audioCtx=null,osc=null,gain=null,playing=false;
+$('#musicBtn').onclick=()=>{try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(!playing){audioCtx.resume();gain=audioCtx.createGain();gain.gain.value=.025;gain.connect(audioCtx.destination);osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=523.25;osc.connect(gain);osc.start();playing=true;$('#musicBtn').textContent='♫ выключить мелодию';toast('Тихая мелодия включена ♡')}else{osc.stop();osc=null;playing=false;$('#musicBtn').textContent='♫ включить мелодию';toast('Мелодия выключена')}}catch(e){toast('Звук недоступен в этом браузере')}};
+$('#dateLine').textContent='Пусть сегодня будет чуточку волшебнее · '+new Date().getFullYear();
+</script>
+</body>
+</html>
