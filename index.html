@@ -153,8 +153,31 @@ $('#unlock').onclick=()=>{const val=$('#password').value.trim().toLowerCase();if
 $('#password').addEventListener('keydown',e=>{if(e.key==='Enter')$('#unlock').click()});
 function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2300)}
 function burst(){const box=$('#confetti');const chars=['♡','✿','🌸','💗','✨'];for(let i=0;i<34;i++){const p=document.createElement('span');p.className='particle';p.textContent=chars[Math.floor(Math.random()*chars.length)];p.style.left=Math.random()*100+'%';p.style.animationDuration=(2.5+Math.random()*2)+'s';p.style.fontSize=(14+Math.random()*18)+'px';box.appendChild(p);setTimeout(()=>p.remove(),5000)}}
-let audioCtx=null,osc=null,gain=null,playing=false;
-$('#musicBtn').onclick=()=>{try{if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();if(!playing){audioCtx.resume();gain=audioCtx.createGain();gain.gain.value=.025;gain.connect(audioCtx.destination);osc=audioCtx.createOscillator();osc.type='sine';osc.frequency.value=523.25;osc.connect(gain);osc.start();playing=true;$('#musicBtn').textContent='♫ выключить мелодию';toast('Тихая мелодия включена ♡')}else{osc.stop();osc=null;playing=false;$('#musicBtn').textContent='♫ включить мелодию';toast('Мелодия выключена')}}catch(e){toast('Звук недоступен в этом браузере')}};
+const songAudio = new Audio('song.mp3');
+songAudio.loop = false;
+let playing=false;
+$('#musicBtn').onclick=async()=>{
+  if(!playing){
+    try{
+      await songAudio.play();
+      playing=true;
+      $('#musicBtn').textContent='♫ выключить мелодию';
+      toast('Музыка включена ♡');
+    }catch(e){
+      toast('Не удалось запустить аудио. Попробуй ещё раз ♡');
+    }
+  }else{
+    songAudio.pause();
+    songAudio.currentTime=0;
+    playing=false;
+    $('#musicBtn').textContent='♫ включить мелодию';
+    toast('Музыка выключена');
+  }
+};
+songAudio.addEventListener('ended',()=>{
+  playing=false;
+  $('#musicBtn').textContent='♫ включить мелодию';
+});
 $('#dateLine').textContent='Пусть сегодня будет чуточку волшебнее · '+new Date().getFullYear();
 </script>
 </body>
